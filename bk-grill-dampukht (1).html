@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BK Grill & Dampukht — Chow Kit, Kuala Lumpur</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --ember: #C0390B;
+    --ember-dark: #8C2507;
+    --ember-glow: #E85D1A;
+    --gold: #D4A843;
+    --gold-light: #F0C96A;
+    --cream: #EEF3FA;
+    --dark: #050D1A;
+    --dark-mid: #0A1628;
+    --dark-card: #0D1E38;
+    --border: rgba(100,160,255,0.12);
+    --muted: #7A9AB8;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Nunito Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--dark); color: var(--cream); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(5,13,26,0.97), transparent); backdrop-filter: blur(4px); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.3rem; color: var(--gold); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.8; transition: opacity 0.2s, color 0.2s; }
+  .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 5% 8vh; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 65% 35%, rgba(200,57,11,0.20) 0%, transparent 45%), radial-gradient(ellipse at 15% 70%, rgba(30,80,200,0.25) 0%, transparent 50%), linear-gradient(160deg, #050D1A 0%, #0A1628 50%, #050D1A 100%); }
+  .hero-overlay-img { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=1400&q=80') center/cover no-repeat; opacity: 0.09; mix-blend-mode: luminosity; }
+  .orb { position: absolute; border-radius: 50%; animation: pulse 4s ease-in-out infinite; }
+  .orb1 { width: 600px; height: 600px; right: -120px; top: 5%; background: radial-gradient(circle, rgba(200,57,11,0.18), transparent 65%); }
+  .orb2 { width: 400px; height: 400px; left: 5%; bottom: 10%; background: radial-gradient(circle, rgba(30,80,200,0.20), transparent 65%); animation-delay: 2s; }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.08);opacity:0.65;} }
+  .hero-tag { position: relative; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .hero-tag::before { content:''; display:block; width:36px; height:1px; background:var(--gold); }
+  h1.hero-title { position: relative; font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.95; font-weight: 700; margin-bottom: 1.8rem; }
+  h1.hero-title em { font-style: italic; color: var(--ember-glow); display: block; }
+  .hero-desc { position: relative; max-width: 440px; font-size: 1rem; line-height: 1.75; color: rgba(238,243,250,0.65); margin-bottom: 2.5rem; }
+  .hero-cta { position: relative; display: flex; gap: 1.2rem; align-items: center; }
+  .btn-primary { background: var(--ember); color: #fff; border: none; padding: 0.9rem 2.2rem; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background 0.25s, transform 0.15s; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
+  .btn-primary:hover { background: var(--ember-glow); transform: translateY(-2px); }
+  .btn-ghost { color: var(--cream); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; border-bottom: 1px solid rgba(238,243,250,0.3); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .btn-ghost:hover { color: var(--gold-light); border-color: var(--gold-light); }
+  .hero-spin { position: absolute; right: 6%; top: 50%; transform: translateY(-50%); width: 130px; height: 130px; border: 1px solid rgba(212,168,67,0.35); border-radius: 50%; background: rgba(10,22,40,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; animation: spin-slow 20s linear infinite; }
+  .hero-spin span:first-child { font-size: 2rem; color: var(--gold); font-family: var(--font-display); font-weight: 700; line-height: 1; }
+  .hero-spin span:last-child { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(238,243,250,0.55); margin-top: 4px; }
+  @keyframes spin-slow { from{transform:translateY(-50%) rotate(0deg);}to{transform:translateY(-50%) rotate(360deg);} }
+
+  /* STRIPE */
+  .stripe { background: var(--ember); padding: 1rem 3rem; display: flex; align-items: center; justify-content: center; gap: 3rem; overflow: hidden; flex-wrap: wrap; }
+  .stripe-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; white-space: nowrap; }
+  .stripe-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.45); }
+
+  /* SECTION UTILS */
+  .section-label { font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+  .section-label::after { content:''; flex:1; max-width:40px; height:1px; background:var(--gold); }
+
+  /* GALLERY */
+  .gallery-section { padding: 5rem 0; background: var(--dark-mid); }
+  .gallery-header { padding: 0 5% 2.5rem; }
+  .gallery-title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; }
+  .gallery-title em { font-style: italic; color: var(--ember-glow); }
+  .gallery-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; grid-template-rows: 280px 280px; gap: 3px; }
+  .gallery-item { position: relative; overflow: hidden; background: var(--dark-card); }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease, filter 0.4s; filter: brightness(0.82) saturate(1.15); }
+  .gallery-item:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.3); }
+  .gallery-item.tall { grid-row: span 2; }
+  .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,13,26,0.75) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 1.2rem 1.5rem; opacity: 0; transition: opacity 0.3s; }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-caption { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-light); }
+
+  /* ABOUT */
+  .about-section { padding: 6rem 5%; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .about-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; font-weight: 700; margin-bottom: 1.5rem; }
+  .about-title span { color: var(--gold); }
+  .about-body { color: rgba(238,243,250,0.63); font-size: 1rem; line-height: 1.85; margin-bottom: 1.2rem; }
+  .about-stats { display: flex; gap: 2.5rem; margin-top: 2rem; }
+  .stat-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 700; color: var(--ember-glow); line-height: 1; }
+  .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(238,243,250,0.45); margin-top: 4px; }
+  .about-visual { position: relative; height: 420px; }
+  .about-card-img { position: absolute; inset: 0 0 40px 40px; background: var(--dark-card); border: 1px solid var(--border); overflow: hidden; }
+  .about-card-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.75) saturate(1.1); }
+  .about-card-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,13,26,0.88) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.8rem; }
+  .about-fire { position: absolute; bottom: 0; left: 0; right: 40%; height: 170px; background: var(--ember-dark); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; }
+  .big-quote { font-family: var(--font-display); font-size: 1rem; font-style: italic; color: var(--gold-light); line-height: 1.6; }
+  .open-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(52,211,153,0.10); border: 1px solid rgba(52,211,153,0.28); color: #6EE7B7; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; margin-top: 0.8rem; align-self: flex-start; }
+  .open-dot { width: 6px; height: 6px; border-radius: 50%; background: #6EE7B7; animation: blink 1.5s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.25;} }
+
+  /* FOOD FEATURE */
+  .food-feature { padding: 5rem 5%; }
+  .food-feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+  .food-photo-wrap { position: relative; overflow: hidden; border: 1px solid var(--border); }
+  .food-photo-wrap img { width: 100%; height: 380px; object-fit: cover; display: block; filter: brightness(0.88) saturate(1.15); transition: transform 0.5s; }
+  .food-photo-wrap:hover img { transform: scale(1.04); }
+  .food-badge { position: absolute; top: 1.2rem; left: 1.2rem; background: var(--ember); color: #fff; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 5px 12px; font-weight: 600; }
+  .food-content h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.2rem; margin-top: 0.8rem; }
+  .food-content h2 em { font-style: italic; color: var(--ember-glow); }
+  .food-content p { color: rgba(238,243,250,0.62); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1rem; }
+  .food-details { margin-top: 1.2rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .food-detail { display: flex; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: rgba(238,243,250,0.6); }
+  .food-detail::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+  /* CUISINE */
+  .cuisine-section { background: var(--dark-card); padding: 6rem 5%; }
+  .cuisine-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+  .cuisine-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; }
+  .cuisine-title em { font-style: italic; color: var(--ember-glow); display: block; }
+  .cuisine-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(100,160,255,0.08); }
+  .cuisine-card { background: var(--dark-mid); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: transform 0.3s; cursor: default; }
+  .cuisine-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--ember); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+  .cuisine-card:hover { transform: translateY(-4px); }
+  .cuisine-card:hover::before { transform: scaleX(1); }
+  .cuisine-number { font-family: var(--font-display); font-size: 4rem; font-weight: 700; color: rgba(100,160,255,0.07); line-height: 1; position: absolute; top: 1.2rem; right: 1.5rem; }
+  .cuisine-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+  .cuisine-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 0.6rem; }
+  .cuisine-desc { font-size: 0.88rem; line-height: 1.7; color: rgba(238,243,250,0.5); }
+  .cuisine-tag { display: inline-block; margin-top: 1rem; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(212,168,67,0.3); padding: 3px 10px; }
+
+  /* LOCATION */
+  .location-section { padding: 6rem 5%; background: var(--dark-mid); }
+  .location-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
+  .location-title { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; margin-bottom: 2rem; line-height: 1.2; }
+  .location-title span { color: var(--ember-glow); }
+  .info-row { display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem 0; border-bottom: 1px solid rgba(100,160,255,0.10); }
+  .info-icon { color: var(--gold); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; }
+  .info-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 3px; }
+  .info-value { font-size: 0.95rem; color: var(--cream); line-height: 1.5; }
+  .info-highlight { color: var(--gold-light); font-weight: 600; }
+  .map-box { background: var(--dark-card); border: 1px solid var(--border); height: 380px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .map-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(100,160,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(100,160,255,0.07) 1px, transparent 1px); background-size: 40px 40px; }
+  .map-pin { font-size: 2.5rem; position: relative; z-index: 1; }
+  .map-label { position: relative; z-index: 1; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 0.8rem; }
+  .map-addr { position: relative; z-index: 1; font-size: 0.78rem; color: rgba(238,243,250,0.45); margin-top: 0.4rem; text-align: center; max-width: 220px; line-height: 1.5; }
+  .map-link { position: relative; z-index: 1; margin-top: 1.2rem; color: var(--cream); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid rgba(238,243,250,0.25); padding-bottom: 2px; transition: color 0.2s; }
+  .map-link:hover { color: var(--gold-light); }
+
+  /* SOCIAL */
+  .social-section { background: var(--ember-dark); padding: 4rem 5%; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .social-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 700; line-height: 1.2; }
+  .social-sub { font-size: 0.88rem; color: rgba(238,243,250,0.6); margin-top: 0.4rem; }
+  .social-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .social-btn { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); color: #fff; text-decoration: none; padding: 0.7rem 1.5rem; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s; }
+  .social-btn:hover { background: rgba(255,255,255,0.22); }
+
+  /* FOOTER */
+  footer { background: #020810; padding: 2.5rem 5%; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(100,160,255,0.1); flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); }
+  .footer-copy { font-size: 0.78rem; color: rgba(238,243,250,0.3); }
+
+  /* SCROLL ANIM */
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s, transform 0.7s; }
+  .fade-up.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 5% 6vh; }
+    .hero-spin { display: none; }
+    .about-grid, .location-grid, .food-feature-grid { grid-template-columns: 1fr; }
+    .about-visual { height: 300px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item.tall { grid-row: span 1; }
+    .cuisine-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">BK Grill & Dampukht</a>
+  <ul class="nav-links">
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#about">Story</a></li>
+    <li><a href="#cuisine">Menu</a></li>
+    <li><a href="#location">Find Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay-img"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-spin">
+    <span>🔥</span>
+    <span>Chow Kit · KL</span>
+  </div>
+  <div class="hero-tag">Authentic Pakistani &amp; Arabic Cuisine</div>
+  <h1 class="hero-title">BK Grill<br><em>&amp; Dampukht</em></h1>
+  <p class="hero-desc">An exquisite culinary haven in the vibrant heart of Kuala Lumpur — where every dish is crafted with passion, fire, and centuries-old tradition.</p>
+  <div class="hero-cta">
+    <a href="#gallery" class="btn-primary">See Our Food</a>
+    <a href="#location" class="btn-ghost">Find Us</a>
+  </div>
+</section>
+
+<!-- STRIPE -->
+<div class="stripe">
+  <div class="stripe-item">🔥 Charcoal Grilled</div>
+  <div class="stripe-dot"></div>
+  <div class="stripe-item">🫕 Slow-Cooked Dampukht</div>
+  <div class="stripe-dot"></div>
+  <div class="stripe-item">🌶️ Chapli Kabab</div>
+  <div class="stripe-dot"></div>
+  <div class="stripe-item">🏆 Best Desi Food in KL</div>
+  <div class="stripe-dot"></div>
+  <div class="stripe-item">✅ 100% Halal</div>
+</div>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header fade-up">
+    <div class="section-label">From the Kitchen</div>
+    <h2 class="gallery-title">Crafted with <em>Fire &amp; Soul</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item tall fade-up">
+      <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&q=85" alt="Meat skewers on charcoal grill" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Charcoal Grill</span></div>
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=700&q=85" alt="Grilled kebab skewers" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Seekh Kebab</span></div>
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=700&q=85" alt="Meat platter with herbs" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Mixed Grill Platter</span></div>
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=700&q=85" alt="Slow cooked lamb curry in pot" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Dampukht Pot</span></div>
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="https://images.unsplash.com/photo-1630851840628-4e72b5a5ff1a?w=700&q=85" alt="Spiced grilled chicken" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Chicken Tikka</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-grid">
+    <div class="fade-up">
+      <div class="section-label">Our Story</div>
+      <h2 class="about-title">Made with <span>love</span>, not just spices</h2>
+      <p class="about-body">Born from a deep love of Pakistani and Arabic culinary heritage, BK Grill & Dampukht brings the smoky aroma of charcoal grills and the slow-cooked mastery of the dampukht pot to the heart of Chow Kit, Kuala Lumpur.</p>
+      <p class="about-body">Every platter is a promise — to deliver something delicious, tasty, and unforgettable. Our special platters have delighted thousands of guests who keep coming back for more.</p>
+      <div class="about-stats">
+        <div><div class="stat-num">116+</div><div class="stat-label">Happy Guests</div></div>
+        <div><div class="stat-num">2AM</div><div class="stat-label">We Close Late</div></div>
+        <div><div class="stat-num">100%</div><div class="stat-label">Halal</div></div>
+      </div>
+    </div>
+    <div class="about-visual fade-up">
+      <div class="about-fire">🔥</div>
+      <div class="about-card-img">
+        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?w=700&q=80" alt="Grilled meat platter">
+        <div class="about-card-img-overlay">
+          <p class="big-quote">"Every bite is a promise of something truly extraordinary."</p>
+          <div class="open-badge"><span class="open-dot"></span> Open Now · Closes 2 AM</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRILL FEATURE -->
+<section class="food-feature" style="background: var(--dark-mid);">
+  <div class="food-feature-grid fade-up">
+    <div class="food-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=85" alt="Charcoal grilled seekh kebabs on skewer">
+      <div class="food-badge">Signature Grill</div>
+    </div>
+    <div class="food-content">
+      <div class="section-label">Grill Speciality</div>
+      <h2>The Art of <em>Charcoal Fire</em></h2>
+      <p>Our kebabs are marinated overnight in a blend of fresh herbs, yoghurt, and hand-ground spices — then cooked over live charcoal that gives each skewer its signature smokiness.</p>
+      <p>From chapli kabab to seekh, boti, and full lamb tikka — every piece is tended until perfectly charred on the outside and irresistibly juicy within.</p>
+      <div class="food-details">
+        <div class="food-detail">Marinated overnight for deep flavour</div>
+        <div class="food-detail">Real charcoal, no shortcuts</div>
+        <div class="food-detail">Chapli Kabab · Seekh · Boti · Tikka</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAMPUKHT FEATURE -->
+<section class="food-feature" style="background: var(--dark-card);">
+  <div class="food-feature-grid fade-up" style="direction: rtl;">
+    <div class="food-photo-wrap" style="direction: ltr;">
+      <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=85" alt="Slow cooked dampukht mutton in pot">
+      <div class="food-badge">Ancient Technique</div>
+    </div>
+    <div class="food-content" style="direction: ltr;">
+      <div class="section-label">Dampukht</div>
+      <h2>Sealed in Flavour, <em>Slow &amp; Low</em></h2>
+      <p>Dampukht is the crown jewel of our kitchen — a Mughal technique over 500 years old. Meat is sealed inside a pot with dough, then slow-cooked over gentle heat until every fibre absorbs the richness of whole spices.</p>
+      <p>The result is fall-off-the-bone tenderness with layers of aroma that no other cooking method can replicate.</p>
+      <div class="food-details">
+        <div class="food-detail">Slow-cooked in a sealed pot (dum)</div>
+        <div class="food-detail">Whole spices · Mutton · Lamb</div>
+        <div class="food-detail">Mughal culinary heritage</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUISINE -->
+<section class="cuisine-section" id="cuisine">
+  <div class="cuisine-header fade-up">
+    <h2 class="cuisine-title">Signature<br><em>Specialities</em></h2>
+    <a href="https://www.facebook.com/BKGrillandDampukht/" target="_blank" class="btn-ghost">Full Menu on Facebook →</a>
+  </div>
+  <div class="cuisine-grid">
+    <div class="cuisine-card fade-up">
+      <div class="cuisine-number">01</div>
+      <div class="cuisine-icon">🥩</div>
+      <div class="cuisine-name">Chapli Kabab</div>
+      <p class="cuisine-desc">Authentic Pakistani minced meat patties with pomegranate seeds, green chillies, and aromatic spices — seared until perfectly crisp.</p>
+      <span class="cuisine-tag">Pakistani Classic</span>
+    </div>
+    <div class="cuisine-card fade-up">
+      <div class="cuisine-number">02</div>
+      <div class="cuisine-icon">🫕</div>
+      <div class="cuisine-name">Dampukht</div>
+      <p class="cuisine-desc">Slow-cooked in a sealed pot — infusing mutton or chicken with deep layered spices. An ancient Mughal technique delivering unrivalled tenderness.</p>
+      <span class="cuisine-tag">Mughal Heritage</span>
+    </div>
+    <div class="cuisine-card fade-up">
+      <div class="cuisine-number">03</div>
+      <div class="cuisine-icon">🍢</div>
+      <div class="cuisine-name">Charcoal Grill</div>
+      <p class="cuisine-desc">Seekh, boti, and tikka kebabs kissed by real charcoal flame. Each skewer marinated overnight for maximum flavour penetration.</p>
+      <span class="cuisine-tag">Signature Grill</span>
+    </div>
+    <div class="cuisine-card fade-up">
+      <div class="cuisine-number">04</div>
+      <div class="cuisine-icon">🐑</div>
+      <div class="cuisine-name">Full Dumba</div>
+      <p class="cuisine-desc">Our legendary whole-lamb Dumba platter — a showstopper for celebrations and feasts. Pre-order recommended.</p>
+      <span class="cuisine-tag">Special Order</span>
+    </div>
+    <div class="cuisine-card fade-up">
+      <div class="cuisine-number">05</div>
+      <div class="cuisine-icon">🍽️</div>
+      <div class="cuisine-name">Special Platter</div>
+      <p class="cuisine-desc">Our chef's curated selection — assorted grilled meats, fresh naan, chutneys, and sides. The perfect introduction to BK Grill.</p>
+      <span class="cuisine-tag">Chef's Pick</span>
+    </div>
+    <div class="cuisine-card fade-up">
+      <div class="cuisine-number">06</div>
+      <div class="cuisine-icon">🫖</div>
+      <div class="cuisine-name">Desi Drinks</div>
+      <p class="cuisine-desc">Authentic lassi, qehwa, or refreshing mint lemonade — the perfect accompaniment to bold, flame-kissed flavours.</p>
+      <span class="cuisine-tag">Beverages</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location-section" id="location">
+  <div class="location-grid">
+    <div class="fade-up">
+      <div class="section-label">Find Us</div>
+      <h2 class="location-title">Right in the <span>heart</span> of KL</h2>
+      <div class="info-row">
+        <div class="info-icon">📍</div>
+        <div><div class="info-label">Address</div><div class="info-value">508, Jalan Tuanku Abdul Halim,<br>Chow Kit, 50100 Kuala Lumpur</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🕐</div>
+        <div><div class="info-label">Hours</div><div class="info-value">Open Daily — <span class="info-highlight">Until 2:00 AM</span></div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">🚗</div>
+        <div><div class="info-label">From KLCC</div><div class="info-value">Approximately 3.25 km — ~10 mins by car</div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">✅</div>
+        <div><div class="info-label">Halal Status</div><div class="info-value"><span class="info-highlight">Fully Halal Certified</span></div></div>
+      </div>
+      <div style="margin-top:2rem;"><a href="https://www.facebook.com/BKGrillandDampukht/" target="_blank" class="btn-primary">View on Facebook</a></div>
+    </div>
+    <div class="fade-up">
+      <div class="map-box">
+        <div class="map-grid"></div>
+        <div class="map-pin">📍</div>
+        <div class="map-label">BK Grill & Dampukht</div>
+        <div class="map-addr">508, Jalan Tuanku Abdul Halim, Chow Kit, 50100 Kuala Lumpur</div>
+        <a class="map-link" href="https://maps.google.com/?q=BK+Grill+Dampukht+Chow+Kit+Kuala+Lumpur" target="_blank">Open in Google Maps →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social-section">
+  <div>
+    <div class="social-title">Follow Our Journey 🔥</div>
+    <div class="social-sub">New platters, specials &amp; behind-the-scenes moments</div>
+  </div>
+  <div class="social-links">
+    <a href="https://www.facebook.com/BKGrillandDampukht/" target="_blank" class="social-btn">Facebook</a>
+    <a href="https://www.tiktok.com/@bk.grill.dampukht" target="_blank" class="social-btn">TikTok</a>
+    <a href="https://www.instagram.com/explore/locations/130121856856841/bk-grill-dampukht/" target="_blank" class="social-btn">Instagram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">BK Grill & Dampukht</div>
+  <div class="footer-copy">© 2025 BK Grill & Dampukht · Chow Kit, Kuala Lumpur · All Rights Reserved</div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
